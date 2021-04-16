@@ -1,11 +1,11 @@
 start:
-	composer install
+	php artisan serve
 
-install:
-	composer install
+lint-fix:
+	composer run-script phpcbf -- --standard=PSR12 app routes tests
 
 lint:
-	composer run-script phpcs -- --standard=PSR12 src tests
+	composer run-script phpcs -- --standard=PSR12 app routes tests
 
 test:
 	composer exec --verbose phpunit tests
