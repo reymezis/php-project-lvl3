@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $faker = \Faker\Factory::create();
+        DB::table('urls')->insert([
+            [
+                'name' => "https://yandex.ru/",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => "https://www." . $faker->domainName,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => "https://www." . $faker->domainName,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => "https://www." . $faker->domainName,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]]);
     }
 }
