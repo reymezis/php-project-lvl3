@@ -38,6 +38,12 @@ class UrlController extends Controller
     public function store(Request $request)
     {
         $url = parse_url($request->input('url.name'));
+        $scheme   = isset($url['scheme']) ? mb_strtolower($url['scheme']) . '://' : '';
+        $host     = isset($url['host']) ? mb_strtolower($url['host']) : '';
+        $requestData = $request->all();
+        $requestData['url']['name'] = "$scheme$host";
+        $request->replace($requestData);
+
         $messages = [
             'required' => 'Поле не должно быть пустым.',
             'url' => 'Введён некорректный адрес сайта.',
@@ -46,18 +52,15 @@ class UrlController extends Controller
         $this->validate($request, [
             'url.name' => 'required|url|unique:urls,name',
         ], $messages);
-        $scheme   = isset($url['scheme']) ? mb_strtolower($url['scheme']) . '://' : '';
-        $host     = isset($url['host']) ? mb_strtolower($url['host']) : '';
-        if ($scheme && $host) {
-            session()->flash('status', 'Сайт добавлен!');
-            $url = DB::table('urls')->insert(
-                [
-                    'name' => "$scheme$host",
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ]
-            );
-        }
+
+        session()->flash('status', 'Сайт добавлен!');
+        $url = DB::table('urls')->insert(
+            [
+                'name' => "$scheme$host",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
+        );
 
         return redirect()->route('urls.index');
     }
