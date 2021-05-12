@@ -4,6 +4,6 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/aa75a8bffb788fd4c40a/test_coverage)](https://codeclimate.com/github/reymezis/php-project-lvl3/test_coverage)
 [![Actions Status](https://github.com/reymezis/php-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/reymezis/php-project-lvl3/actions)
 
-[Demo is here](https://page-analyzer-lrvl.herokuapp.com/)
+[Demo is here](http://page-analyzer-lrvl.herokuapp.com/)
 
 
