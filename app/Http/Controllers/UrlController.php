@@ -40,8 +40,9 @@ class UrlController extends Controller
         $url = parse_url($request->input('url.name'));
         $scheme   = isset($url['scheme']) ? mb_strtolower($url['scheme']) . '://' : '';
         $host     = isset($url['host']) ? mb_strtolower($url['host']) : '';
+        $path     = isset($url['path']) ? $url['path'] : '';
         $requestData = $request->all();
-        $requestData['url']['name'] = "$scheme$host";
+        $requestData['url']['name'] = $scheme || $host ? "$scheme$host" : "$path";
         $request->replace($requestData);
 
         $messages = [
